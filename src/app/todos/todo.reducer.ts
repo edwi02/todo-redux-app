@@ -12,7 +12,23 @@ export const initialState: Todo[] = [
 const _todoReducer = createReducer(
     initialState,
     // tslint:disable-next-line:max-line-length
-    on(actions.crear, (state, { texto }) => [...state, new Todo( texto )] ) // Extraemos cada uno de los ítems y los regresamos de manera independiente
+    on(actions.crear, (state, { texto }) => [...state, new Todo( texto )] ), // Extraemos cada uno de los ítems y los regresamos de manera independiente
+    on(actions.toggle, (state, { id }) => {
+        return state.map( todo => {
+
+            if ( todo.id === id ) {
+                // Cómo no debo editar el directamente el objeto [todo], se aplica esta expressión
+                // con esta destructuración, en el map se crea un nuevo objeto y no se afecta directamente 
+                // el objeto referenciado
+                return {
+                    ...todo,
+                    completado: !todo.completado
+                };
+            } else {
+                return todo;
+            }
+        });
+    }),
 );
 
 export function todoReducer( state, action ): any {
