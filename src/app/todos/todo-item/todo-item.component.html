@@ -19,5 +19,6 @@
         type="text"
         [formControl]="txtEditar"
         (blur)="terminarEdicion()"
+        (keydown.enter)="$event.target.blur();false"
         #inputFisico>
 </li>

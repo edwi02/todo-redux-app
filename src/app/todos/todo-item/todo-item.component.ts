@@ -38,6 +38,8 @@ export class TodoItemComponent implements OnInit {
 
   editar(): void {
     this.editando = true;
+    this.txtEditar.setValue( this.todo.texto );
+
     setTimeout(() => {
       // this.txtInputFisico.nativeElement.focus();
       this.txtInputFisico.nativeElement.select();
@@ -46,6 +48,15 @@ export class TodoItemComponent implements OnInit {
 
   terminarEdicion(): void {
     this.editando = false;
+
+    if (this.txtEditar.invalid ) { return; }
+    if (this.txtEditar.value === this.todo.texto ){ return; }
+
+    this.store.dispatch(
+      actions.editar({
+        id: this.todo.id,
+        texto: this.txtEditar.value
+      }));
   }
 
 }
