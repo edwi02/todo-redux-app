@@ -42,7 +42,15 @@ const _todoReducer = createReducer(
                 return todo;
             }
         });
-    })
+    }),
+    on(actions.toggleAll, (state, { completado }) => {
+        return state.map( todo => {
+            return {
+                ...todo,
+                completado
+            };
+        });
+    }),
 );
 
 export function todoReducer( state, action ): any {
