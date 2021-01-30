@@ -46,6 +46,14 @@ export class TodoItemComponent implements OnInit {
     }, 1);
   }
 
+  borrar(): void {
+
+    this.store.dispatch( actions.borrar({
+      id: this.todo.id
+      })
+    );
+  }
+
   terminarEdicion(): void {
     this.editando = false;
 

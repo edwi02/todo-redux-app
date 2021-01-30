@@ -13,6 +13,7 @@ const _todoReducer = createReducer(
     initialState,
     // tslint:disable-next-line:max-line-length
     on(actions.crear, (state, { texto }) => [...state, new Todo( texto )] ), // Extraemos cada uno de los ítems y los regresamos de manera independiente
+    on(actions.borrar, (state, {id}) =>  state.filter( todo => todo.id !== id )), // El filter se puede usar
     on(actions.toggle, (state, { id }) => {
         return state.map( todo => {
 
@@ -41,7 +42,7 @@ const _todoReducer = createReducer(
                 return todo;
             }
         });
-    }),
+    })
 );
 
 export function todoReducer( state, action ): any {
