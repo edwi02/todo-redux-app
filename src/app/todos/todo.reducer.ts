@@ -14,6 +14,7 @@ const _todoReducer = createReducer(
     // tslint:disable-next-line:max-line-length
     on(actions.crear, (state, { texto }) => [...state, new Todo( texto )] ), // Extraemos cada uno de los ítems y los regresamos de manera independiente
     on(actions.borrar, (state, {id}) =>  state.filter( todo => todo.id !== id )), // El filter se puede usar
+    on(actions.limpiarTodos, (state) => state.filter( todo => !todo.completado) ),
     on(actions.toggle, (state, { id }) => {
         return state.map( todo => {
 
